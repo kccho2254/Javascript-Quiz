@@ -15,241 +15,274 @@
 
 var add = (function () {
   var counter = 0;
-  return function () {counter += 1; return counter;}
- 
+  return function () { counter += 1; return counter; }
+
 
 })();
 
-function myFunction(){
+function myFunction() {
   document.getElementById("myScore").innerHTML = "Correct answers: " + add();
   if ($('#returnBtn').click()) {
     counter = 0;
   }
-} 
-
-$(".first-question").hide();
-$('.second-question').hide();
-$('.third-question').hide();
-$('.fourth-question').hide();
-$('.fifth-question').hide();
-$('.sixth-question').hide();
-$('.seventh-question').hide();
-$('.eighth-question').hide();
-$('.ninth-question').hide();
-$('.tenth-question').hide();
-$('.eleventh-question').hide();
-$(".leaderboard").hide();
-
-// Cycling through questions
-
-$(document).ready(function(){
-
-  $("#home-hide").click(function(){
-
-    $(".first-question").show();
-    $(".start-page").hide();
-
-  });
-
-});
-
-$(document).ready(function(){
-
-  $("#first-hide").click(function(){
-
-    $(".first-question").hide();
-    $(".second-question").show();
-
-  });
-
-});
-
-$(document).ready(function(){
-
-  $("#second-hide").click(function(){
-
-    $(".second-question").hide();
-    $(".third-question").show();
-
-  });
-
-});
-
-$(document).ready(function(){
-
-  $("#third-hide").click(function(){
-
-    $(".third-question").hide();
-    $(".fourth-question").show();
-
-  });
-
-});
-
-$(document).ready(function(){
-
-  $("#fourth-hide").click(function(){
-
-    $(".fourth-question").hide();
-    $(".fifth-question").show();
-
-  });
-
-});
-
-$(document).ready(function(){
-
-  $("#fifth-hide").click(function(){
-
-    $(".fifth-question").hide();
-    $(".sixth-question").show();
-
-  });
-
-});
-
-$(document).ready(function(){
-
-  $("#sixth-hide").click(function(){
-
-    $(".sixth-question").hide();
-    $(".seventh-question").show();
-
-  });
-
-});
-
-$(document).ready(function(){
-
-  $("#seventh-hide").click(function(){
-
-    $(".seventh-question").hide();
-    $(".eighth-question").show();
-
-  });
-
-});
-
-$(document).ready(function(){
-
-  $("#eighth-hide").click(function(){
-
-    $(".eighth-question").hide();
-    $(".ninth-question").show();
-
-  });
-
-});
-
-$(document).ready(function(){
-
-  $("#ninth-hide").click(function(){
-
-    $(".ninth-question").hide();
-    $(".tenth-question").show();
-
-  });
-
-});
-
-$(document).ready(function(){
-
-  $("#tenth-hide").click(function(){
-
-    $(".tenth-question").hide();
-    $(".eleventh-question").show();
-
-  });
-
-});
-
-$(document).ready(function(){
-
-  $("#eleventh-hide").click(function(){
-
-    $(".eleventh-question").hide();
-    $(".myScore").hide();
-    $(".leaderboard").show();
-
-  });
-
-});
-
-// Return button 
-
-$(document).ready(function(){
-
-  $("#returnBtn").on("click", function(){    
-
-    $(".first-question").hide();
-    $('.second-question').hide();
-    $('.third-question').hide();
-    $('.fourth-question').hide();
-    $('.fifth-question').hide();
-    $('.sixth-question').hide();
-    $('.seventh-question').hide();
-    $('.eighth-question').hide();
-    $('.ninth-question').hide();
-    $('.tenth-question').hide();
-    $('.eleventh-question').hide();
-    $(".leaderboard").hide();
-    $("#startPoint").show();
-
-  });
-});
-
-// Leaderboard stuff goes here
-
-$(document).ready(function(){
-
-  $("#leaderboardInt").on("click", function(){
-    
-    $(".first-question").hide();
-    $('.second-question').hide();
-    $('.third-question').hide();
-    $('.fourth-question').hide();
-    $('.fifth-question').hide();
-    $('.sixth-question').hide();
-    $('.seventh-question').hide();
-    $('.eighth-question').hide();
-    $('.ninth-question').hide();
-    $('.tenth-question').hide();
-    $('.eleventh-question').hide();
-    $("#startPoint").hide();
-    $(".leaderboard").show();
-
-  });
-});
-
-// myInitials and myHiscore to be linked from HTML
-// myAttempt at leaderboard
-// Local Storage shenanigans go here
-
-var initialsSpan = document.querySelector("#myInitials");
-var hiscoreSpan = document.querySelector("#myHiscore");
-var signUpButton = document.querySelector("#eleventh-hide");
-
-
-function renderLastRegistered() {
-  var initials = localStorage.getItem("initials");
-  var hiscore = localStorage.getItem("hiscore");
-
-  if (!initials || !hiscore) {
-    return;
-  }
-
-  initialsSpan.textContent = initials;
-  hiscoreSpan.textContent = hiscore;
 }
 
-signUpButton.addEventListener("click", function(event) {
-  event.preventDefault();
+var questionTitleEl = document.getElementById('question-title');
+var questionEl = document.getElementById('question-choices');
+var startBtn = document.getElementById('start-button');
+var startPoint = document.getElementById('start-point');
 
-  var initials = document.querySelector("#myInitials").value;
-  var hiscore = document.querySelector("#myHiscore").value;
 
-    localStorage.setItem("initial", initials);
-    localStorage.setItem("hiscore", hiscore);
-    renderLastRegistered();
-  
-});
+
+var questions = [
+  {
+    title: 'What is 1 + 1?',
+    buttonChoices: [1, 2, 3, 4],
+    answer: 2
+  },
+  {
+    title: 'Which of these is a primitive data type?',
+    buttonChoices: ['data', 'function', 'object', 'boolean'],
+    answer: 'boolean'
+  },
+];
+
+
+
+let questionIndex = 0;
+
+function startQuiz() {
+  // Hide intro
+  // hide start button
+  startPoint.style.display = 'none';
+
+  // Generate a question
+  generateQuestion();
+
+}
+
+
+function generateQuestion() {
+
+  var currentQuestion = questions[questionIndex]
+
+  questionTitleEl.textContent = currentQuestion.title;
+  questionTitleEl.textContent = questions[questionIndex].title;
+
+  document.getElementById('question-choices').innerHTML = "";
+
+  for (var i = 0; i <= 3; i++) {
+
+    var tempButton = document.createElement('button');
+
+    tempButton.setAttribute('value', currentQuestion.buttonChoices[i])
+    tempButton.textContent = currentQuestion.buttonChoices[i];
+
+    tempButton.onclick = validateAnswer;
+
+    questionEl.appendChild(tempButton);
+  };
+};
+
+function validateAnswer() {
+  // check if answer is correct
+
+  if (this.value === questions[questionIndex].answer) {
+    // score goes up
+
+    questionIndex++;
+    // generate new question
+    generateQuestion();
+  } else {
+    // timer go down
+
+    questionIndex++;
+    generateQuestion();
+  }
+}
+
+
+
+
+
+
+// $(".first-question").hide();
+// $('.second-question').hide();
+// $('.third-question').hide();
+// $('.fourth-question').hide();
+// $('.fifth-question').hide();
+// $('.sixth-question').hide();
+// $('.seventh-question').hide();
+// $('.eighth-question').hide();
+// $('.ninth-question').hide();
+// $('.tenth-question').hide();
+// $('.eleventh-question').hide();
+// $(".leaderboard").hide();
+
+// // Cycling through questions
+
+// $(document).ready(function () {
+
+//   $("#startPoint").click(function () {
+
+//     $(".first-question").show();
+//     $(".start-page").hide();
+
+//   });
+
+//   $("#first-hide").click(function () {
+
+//     $(".first-question").hide();
+//     $(".second-question").show();
+
+//   });
+
+//   $("#second-hide").click(function () {
+
+//     $(".second-question").hide();
+//     $(".third-question").show();
+
+//   });
+
+//   $("#third-hide").click(function () {
+
+//     $(".third-question").hide();
+//     $(".fourth-question").show();
+
+//   });
+
+//   $("#fourth-hide").click(function () {
+
+//     $(".fourth-question").hide();
+//     $(".fifth-question").show();
+
+//   });
+
+//   $("#fifth-hide").click(function () {
+
+//     $(".fifth-question").hide();
+//     $(".sixth-question").show();
+
+//   });
+
+//   $("#sixth-hide").click(function () {
+
+//     $(".sixth-question").hide();
+//     $(".seventh-question").show();
+
+//   });
+
+//   $("#seventh-hide").click(function () {
+
+//     $(".seventh-question").hide();
+//     $(".eighth-question").show();
+
+//   });
+
+//   $("#eighth-hide").click(function () {
+
+//     $(".eighth-question").hide();
+//     $(".ninth-question").show();
+
+//   });
+
+//   $("#ninth-hide").click(function () {
+
+//     $(".ninth-question").hide();
+//     $(".tenth-question").show();
+
+//   });
+
+
+//   $("#tenth-hide").click(function () {
+
+//     $(".tenth-question").hide();
+//     $(".eleventh-question").show();
+
+//   });
+
+//   $("#eleventh-hide").click(function () {
+
+//     $(".eleventh-question").hide();
+//     $(".myScore").hide();
+//     $(".leaderboard").show();
+
+//   });
+
+
+//   // Return button 
+
+//   $("#returnBtn").on("click", function () {
+
+//     $(".first-question").hide();
+//     $('.second-question').hide();
+//     $('.third-question').hide();
+//     $('.fourth-question').hide();
+//     $('.fifth-question').hide();
+//     $('.sixth-question').hide();
+//     $('.seventh-question').hide();
+//     $('.eighth-question').hide();
+//     $('.ninth-question').hide();
+//     $('.tenth-question').hide();
+//     $('.eleventh-question').hide();
+//     $(".leaderboard").hide();
+//     $("#startPoint").show();
+
+//   });
+
+//   // Leaderboard stuff goes here
+
+
+//   $("#leaderboardInt").on("click", function () {
+
+//     $(".first-question").hide();
+//     $('.second-question').hide();
+//     $('.third-question').hide();
+//     $('.fourth-question').hide();
+//     $('.fifth-question').hide();
+//     $('.sixth-question').hide();
+//     $('.seventh-question').hide();
+//     $('.eighth-question').hide();
+//     $('.ninth-question').hide();
+//     $('.tenth-question').hide();
+//     $('.eleventh-question').hide();
+//     $("#startPoint").hide();
+//     $(".leaderboard").show();
+
+//   });
+
+
+// });
+
+// // myInitials and myHiscore to be linked from HTML
+// // myAttempt at leaderboard
+// // Local Storage shenanigans go here
+
+// var initialsSpan = document.querySelector("#myInitials");
+// var hiscoreSpan = document.querySelector("#myHiscore");
+// var signUpButton = document.querySelector("#eleventh-hide");
+
+
+// function renderLastRegistered() {
+//   var initials = localStorage.getItem("initials");
+//   var hiscore = localStorage.getItem("hiscore");
+
+//   if (!initials || !hiscore) {
+//     return;
+//   }
+
+//   initialsSpan.textContent = initials;
+//   hiscoreSpan.textContent = hiscore;
+// }
+
+// signUpButton.addEventListener("click", function (event) {
+//   event.preventDefault();
+
+//   var initials = document.querySelector("#myInitials").value;
+//   var hiscore = document.querySelector("#myHiscore").value;
+
+//   localStorage.setItem("initial", initials);
+//   localStorage.setItem("hiscore", hiscore);
+//   renderLastRegistered();
+
+// });
