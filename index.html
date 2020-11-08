@@ -3,25 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="./style.css"/>
+    <link rel="stylesheet" type="text/css" href="./Assets/style.css"/>
     <link rel="stylesheet" type="text/css" href="./Assets/jass.css"/>
-
     <title>Web API Quiz!</title>
 </head>
-<body class="bg-dark text-light w-100 display-flex justify-center">
-    <main class="text-center col-4">
+<body class="bg-dark text-light">
+    <main class="justify-center w-100 display-flex text-center">
 
-    <div class="start-page">
+    <div id="startPoint" class="start-page col-4">
+
     <h3>Coding Quiz Challenge</h1>
     <hr />
-
     <h5>Try to answer the following questions correctly. These will include trivia about Javascript which can improve your overall knowledge in the subject.</h2>
-    
     <button id="home-hide" class="btn btn-info">Start!</button>
 
     </div>
 
-    <section class="first-question">
+    <section class="first-question col-4">
 
         <h5>1: Why do I exist?</h5>
         <hr />
@@ -34,7 +32,7 @@
 
     </section>
 
-    <section class="second-question">
+    <section class="second-question col-4">
 
         <h5>2: Why do you exist?</h5>
         <hr />
@@ -47,7 +45,7 @@
 
     </section>
     
-    <section class="third-question">
+    <section class="third-question col-4">
 
         <h5>3: Why does anything exist?</h5>
         <hr />
@@ -60,7 +58,7 @@
 
     </section>
 
-    <section class="fourth-question">
+    <section class="fourth-question col-4">
 
         <h5>4: What is the metaphysical status of God?</h5>
         <hr />
@@ -73,7 +71,7 @@
 
     </section>
 
-    <section class="fifth-question">
+    <section class="fifth-question col-4">
 
         <h5>5: Which form of government is best?</h5>
         <hr />
@@ -86,7 +84,7 @@
 
     </section>
 
-    <section class="sixth-question">
+    <section class="sixth-question col-4">
 
         <h5>6: What is philosophy?</h5>
         <hr />
@@ -99,7 +97,7 @@
 
     </section>
 
-    <section class="seventh-question">
+    <section class="seventh-question col-4">
 
         <h5>7: What is science?</h5>
         <hr />
@@ -112,7 +110,7 @@
 
     </section>
 
-    <section class="eighth-question">
+    <section class="eighth-question col-4">
 
         <h5>8: What is life?</h5>
         <hr />
@@ -125,7 +123,7 @@
 
     </section>
 
-    <section class="ninth-question">
+    <section class="ninth-question col-4">
 
         <h5>9: Are aliens real?</h5>
         <hr />
@@ -138,7 +136,7 @@
 
     </section>
 
-    <section class="tenth-question">
+    <section class="tenth-question col-4">
 
         <h5>10: Is single-tier healthcare good?</h5>
         <hr />
@@ -151,24 +149,27 @@
 
     </section>
 
-    <section class="eleventh-question">
+    <section class="eleventh-question col-4">
 
         <h5>Final Question: Is there a God?</h5>
         <hr />
         <div id="eleventh-hide">
-            <button class="btn" onclick="myFunction()">A: I don't know if there is or isn't a God presently, but I may later given physical, emotional, or theoretical considerations</button>
+            <button class="btn">A: I don't know if there is or isn't a God presently, but I may later given physical, emotional, or theoretical considerations</button>
             <button class="btn">B: I won't ever know if there is a God as I am now, but I may later if the human condition changes</button>
-            <button class="btn">C: I can't ever know if there is or isn't a God no matter what happens to me</button>
-            <button class="btn">D: No one can ever know if there is or isn't a God, no matter what happens</button>
+            <button class="btn">C: No one can ever know if there is or isn't a God, no matter what happens</button>
+            <button class="btn" onclick="myFunction()">D: Javascript is our God now</button>
         </div>
 
     </section>
 
-    <section class="leaderboard">
+    <section class="leaderboard col-4">
+        <p>Your score:</p>
         <p>Hi-scores:</p>
-        when I click the last question, display the leaderboard
-        leaderboard should display the score, with a form to enter initials
-        list element here to display previous forms
+        <li>
+            when I click the last question, display the leaderboard
+            leaderboard should display the score, with a form to enter initials
+            list element here to display previous forms
+        </li>
 
 
     </section>
@@ -177,9 +178,15 @@
     <script type="text/javascript" src="./script.js"></script>
 
     </main>
+
 <article>
+    
         <h4 id="myScore">Correct answers: 0</h4>
+        <button id="returnBtn"  class="btn">Return</button>
+        <button id="leaderboardInt" class="btn">Leaderboard</button>
+
 </article>
+
 
 </body>
 </html>

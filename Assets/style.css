@@ -1,0 +1,18 @@
+/* O_O; */
+
+article {
+    flex-flow: column;
+    margin-left: 10px;
+
+}
+
+
+/* 
+TO DO:
+
+    Make a leaderboard that displays initials and scores
+    Make a timer when the quiz button is pressed
+    Make the quiz end when the timer runs out
+    Reset score when return button is clicked 
+    
+    */
